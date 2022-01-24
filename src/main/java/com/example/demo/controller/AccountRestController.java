@@ -6,6 +6,7 @@ import com.example.demo.dto.BalanceDTO;
 import com.example.demo.dto.TransactionDTO;
 import com.example.demo.dto.bank_transfer.MoneyTransferDTO;
 import com.example.demo.service.AccountService;
+import com.example.demo.validation.ValidationStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -51,7 +52,7 @@ public class AccountRestController {
 			),
 			@ApiResponse(
 					responseCode = "400",
-					description = "",
+					description = "The error returned from client",
 					content = {
 							@Content(
 									mediaType = APPLICATION_JSON_VALUE,
@@ -81,7 +82,7 @@ public class AccountRestController {
 			),
 			@ApiResponse(
 					responseCode = "400",
-					description = "",
+					description = "The error returned from client",
 					content = {
 							@Content(
 									mediaType = APPLICATION_JSON_VALUE,
@@ -115,11 +116,14 @@ public class AccountRestController {
 			),
 			@ApiResponse(
 					responseCode = "400",
-					description = "",
+					description = "The error returned",
 					content = {
 							@Content(
-									mediaType = APPLICATION_JSON_VALUE,
 									schema = @Schema(implementation = ServerErrorResponse.class)
+							),
+							@Content(
+									mediaType = APPLICATION_JSON_VALUE,
+									schema = @Schema(implementation = ValidationStatus.class)
 							)
 					}
 			)
